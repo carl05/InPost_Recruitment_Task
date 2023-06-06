@@ -33,7 +33,7 @@ class MockShipmentApi(
 
     override suspend fun getShipments(): List<ShipmentNetwork> {
         delay(1000)
-        return if (false) {
+        return if (firstUse) {
             firstUse = false
             emptyList()
         } else {
