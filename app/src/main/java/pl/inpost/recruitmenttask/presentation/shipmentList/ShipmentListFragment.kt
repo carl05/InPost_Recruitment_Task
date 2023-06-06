@@ -40,13 +40,16 @@ class ShipmentListFragment : Fragment() {
             val data = shipments.toMutableList()
             val (items, flaggedItems) = fillAdapterList(data)
             val adapter = ShipmentSectionedAdapter(items + flaggedItems)
-            binding?.recycleViewShipments?.layoutManager = LinearLayoutManager(requireContext())
+            val linearLayoutManager = LinearLayoutManager(requireContext())
+            linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+            binding?.recycleViewShipments?.layoutManager = linearLayoutManager
             binding?.recycleViewShipments?.adapter = adapter
-            binding?.swipeRefresh?.isRefreshing = false
+//            binding?.swipeRefresh?.isRefreshing = false
         }
-        binding?.swipeRefresh?.setOnRefreshListener {
-            viewModel.refreshData()
-        }
+//        binding?.swipeRefresh?.setOnRefreshListener {
+//            viewModel.refreshData()
+//        }
+        viewModel.refreshData()
         viewModel.refreshData()
     }
 
@@ -65,8 +68,8 @@ class ShipmentListFragment : Fragment() {
         }
         //add the categories in begining only
         // if have at least one item
-        takeIf { items.size > 0 }?.run {  items.add(CategoryItem(getString(R.string.status_ready_to_pickup))) }
-        takeIf { flaggedItems.size > 0 }?.run { flaggedItems.add(CategoryItem(getString(R.string.status_other))) }
+//        takeIf { items.size > 0 }?.run {  items.add(CategoryItem(getString(R.string.status_ready_to_pickup))) }
+//        takeIf { flaggedItems.size > 0 }?.run { flaggedItems.add(CategoryItem(getString(R.string.status_other))) }
 
         return Pair(items, flaggedItems)
     }

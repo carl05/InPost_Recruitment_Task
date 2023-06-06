@@ -60,8 +60,8 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>):
 
         inner class ItemViewHolder(val binding: ShipmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
             fun bind(shipmentItem: ShipmentItem) {
-                binding.shipmentNumber.text = shipmentItem.shipmentNetwork.number
-                binding.status.text = shipmentItem.shipmentNetwork.status
+                binding.tvShipmentNumber.text = shipmentItem.shipmentNetwork.number
+                binding.tvStatus.text = shipmentItem.shipmentNetwork.status
             }
         }
     }
