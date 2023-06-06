@@ -38,7 +38,8 @@ class ShipmentListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(requireActivity()) { shipments ->
-            val (items, flaggedItems) = fillAdapterList(shipments)
+            val data = shipments.toMutableList()
+            val (items, flaggedItems) = fillAdapterList(data)
             val adapter = ShipmentSectionedAdapter(items + flaggedItems)
             binding?.recycleViewShipments?.layoutManager = LinearLayoutManager(requireContext())
             binding?.recycleViewShipments?.adapter = adapter
@@ -46,12 +47,15 @@ class ShipmentListFragment : Fragment() {
         viewModel.refreshData()
     }
 
-    private fun fillAdapterList(shipments: List<ShipmentNetwork>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
+    private fun fillAdapterList(shipments: MutableList<ShipmentNetwork>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
         val items = mutableListOf<ShipmentAdapterItem>()
         val flaggedItems = mutableListOf<ShipmentAdapterItem>()
 
-        items.add(CategoryItem(getString(R.string.ready_pick_up)))
-        flaggedItems.add(CategoryItem(getString(R.string.other)))
+        items.add(CategoryItem(getString(R.string.status_ready_to_pickup)))
+        flaggedItems.add(CategoryItem(getString(R.string.status_other)))
+
+        viewModel.sortItems(shipments)
+
         shipments.forEach { shipmentNetwork ->
             if (shipmentNetwork.operations.highlight) {
                 flaggedItems.add(ShipmentItem(shipmentNetwork))
@@ -59,6 +63,7 @@ class ShipmentListFragment : Fragment() {
                 items.add(ShipmentItem(shipmentNetwork))
             }
         }
+
         return Pair(items, flaggedItems)
     }
 

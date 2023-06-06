@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.data.network.model.ShipmentStatus
 import pl.inpost.recruitmenttask.domain.ShipmentsUseCase
 import pl.inpost.recruitmenttask.util.setState
 import javax.inject.Inject
@@ -27,5 +28,19 @@ class ShipmentListViewModel @Inject constructor(
             val shipments = shipmentUseCase.getShipments()
             mutableViewState.setState { shipments }
         }
+    }
+
+    fun sortItems(items: MutableList<ShipmentNetwork>) {
+        items.sortWith(compareBy(
+            { shipment ->
+                if (ShipmentStatus.values().map { it.name }
+                        .contains(shipment.status)) ShipmentStatus.valueOf(shipment.status)
+                else ShipmentStatus.OTHER
+            },
+            { it.pickUpDate },
+            { it.expiryDate },
+            { it.storedDate },
+            { it.number }
+        ))
     }
 }
