@@ -1,13 +1,17 @@
 package pl.inpost.recruitmenttask.presentation.shipmentList
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.databinding.FragmentShipmentListBinding
+
 
 @AndroidEntryPoint
 class ShipmentListFragment : Fragment() {
@@ -17,7 +21,6 @@ class ShipmentListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -40,16 +43,12 @@ class ShipmentListFragment : Fragment() {
             val data = shipments.toMutableList()
             val (items, flaggedItems) = fillAdapterList(data)
             val adapter = ShipmentSectionedAdapter(items + flaggedItems)
-            val linearLayoutManager = LinearLayoutManager(requireContext())
-            linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-            binding?.recycleViewShipments?.layoutManager = linearLayoutManager
             binding?.recycleViewShipments?.adapter = adapter
-//            binding?.swipeRefresh?.isRefreshing = false
+            binding?.swipeRefresh?.isRefreshing = false
         }
-//        binding?.swipeRefresh?.setOnRefreshListener {
-//            viewModel.refreshData()
-//        }
-        viewModel.refreshData()
+        binding?.swipeRefresh?.setOnRefreshListener {
+            viewModel.refreshData()
+        }
         viewModel.refreshData()
     }
 
@@ -67,17 +66,14 @@ class ShipmentListFragment : Fragment() {
             }
         }
         //add the categories in begining only
-        // if have at least one item
-//        takeIf { items.size > 0 }?.run {  items.add(CategoryItem(getString(R.string.status_ready_to_pickup))) }
-//        takeIf { flaggedItems.size > 0 }?.run { flaggedItems.add(CategoryItem(getString(R.string.status_other))) }
+        //if have at least one item
+        takeIf { items.size > 0 }?.run {  items.add(0,CategoryItem(getString(R.string.status_ready_to_pickup))) }
+        takeIf { flaggedItems.size > 0 }?.run { flaggedItems.add(0,CategoryItem(getString(R.string.status_other))) }
 
         return Pair(items, flaggedItems)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
+
 
     companion object {
         fun newInstance() = ShipmentListFragment()
