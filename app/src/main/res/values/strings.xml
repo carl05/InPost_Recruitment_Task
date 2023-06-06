@@ -14,4 +14,5 @@
     <string name="status_pickup_time_expired">Upłynął termin odbioru</string>
     <string name="status_ready_to_pickup">Gotowa do odbioru</string>
     <string name="status_returned_to_sender">Zwrot do Nadawcy</string>
+    <string name="category">category</string>
 </resources>
