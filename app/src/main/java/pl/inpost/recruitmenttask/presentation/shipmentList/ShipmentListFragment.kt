@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pl.inpost.recruitmenttask.R
-import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.databinding.FragmentShipmentListBinding
 
 @AndroidEntryPoint
@@ -51,17 +50,17 @@ class ShipmentListFragment : Fragment() {
         viewModel.refreshData()
     }
 
-    private fun fillAdapterList(shipments: MutableList<ShipmentNetwork>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
+    private fun fillAdapterList(shipments: MutableList<ShipmentNetworkVO>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
         val items = mutableListOf<ShipmentAdapterItem>()
         val flaggedItems = mutableListOf<ShipmentAdapterItem>()
 
         viewModel.sortItems(shipments)
 
-        shipments.forEach { shipmentNetwork ->
-            if (shipmentNetwork.operations.highlight) {
-                flaggedItems.add(ShipmentItem(shipmentNetwork))
+        shipments.forEach { shipmentNetworkVO ->
+            if (shipmentNetworkVO.highlight) {
+                flaggedItems.add(ShipmentItem(shipmentNetworkVO))
             } else {
-                items.add(ShipmentItem(shipmentNetwork))
+                items.add(ShipmentItem(shipmentNetworkVO))
             }
         }
         //add the categories in begining only

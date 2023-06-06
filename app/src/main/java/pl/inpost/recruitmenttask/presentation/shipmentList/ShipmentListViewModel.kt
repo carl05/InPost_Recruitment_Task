@@ -8,7 +8,6 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.data.network.model.ShipmentStatus
 import pl.inpost.recruitmenttask.domain.ShipmentsUseCase
 import pl.inpost.recruitmenttask.util.setState
@@ -19,8 +18,8 @@ class ShipmentListViewModel @Inject constructor(
     private val shipmentUseCase: ShipmentsUseCase
 ) : ViewModel() {
 
-    private val mutableViewState = MutableLiveData<List<ShipmentNetwork>>(emptyList())
-    val viewState: LiveData<List<ShipmentNetwork>> = mutableViewState
+    private val mutableViewState = MutableLiveData<List<ShipmentNetworkVO>>(emptyList())
+    val viewState: LiveData<List<ShipmentNetworkVO>> = mutableViewState
 
     @OptIn(DelicateCoroutinesApi::class)
     fun refreshData() {
@@ -30,7 +29,7 @@ class ShipmentListViewModel @Inject constructor(
         }
     }
 
-    fun sortItems(items: MutableList<ShipmentNetwork>) {
+    fun sortItems(items: MutableList<ShipmentNetworkVO>) {
         items.sortWith(compareBy(
             { shipment ->
                 if (ShipmentStatus.values().map { it.name }
