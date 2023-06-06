@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pl.inpost.recruitmenttask.R
+import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.databinding.FragmentShipmentListBinding
 
 @AndroidEntryPoint
@@ -37,28 +38,28 @@ class ShipmentListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(requireActivity()) { shipments ->
-            val items = mutableListOf<ShipmentAdapterItem>()
-            val flaggedItems = mutableListOf<ShipmentAdapterItem>()
-
-            items.add(CategoryItem("Gotowe do odbioru"))
-            flaggedItems.add(CategoryItem("Pozostate"))
-            shipments.forEach { shipmentNetwork ->
-                if(shipmentNetwork.operations.highlight){
-                    flaggedItems.add(ShipmentItem(shipmentNetwork))
-                }else{
-                    items.add(ShipmentItem(shipmentNetwork))
-                }
-//                val shipmentItemBinding = ShipmentItemBinding.inflate(layoutInflater).apply {
-//                    shipmentNumber.text = shipmentNetwork.number
-//                    status.text = shipmentNetwork.status
-//                }
-//                binding?.recycleViewShipments?.addView(shipmentItemBinding.root)
-            }
+            val (items, flaggedItems) = fillAdapterList(shipments)
             val adapter = ShipmentSectionedAdapter(items + flaggedItems)
-
             binding?.recycleViewShipments?.layoutManager = LinearLayoutManager(requireContext())
             binding?.recycleViewShipments?.adapter = adapter
         }
+        viewModel.refreshData()
+    }
+
+    private fun fillAdapterList(shipments: List<ShipmentNetwork>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
+        val items = mutableListOf<ShipmentAdapterItem>()
+        val flaggedItems = mutableListOf<ShipmentAdapterItem>()
+
+        items.add(CategoryItem(getString(R.string.ready_pick_up)))
+        flaggedItems.add(CategoryItem(getString(R.string.other)))
+        shipments.forEach { shipmentNetwork ->
+            if (shipmentNetwork.operations.highlight) {
+                flaggedItems.add(ShipmentItem(shipmentNetwork))
+            } else {
+                items.add(ShipmentItem(shipmentNetwork))
+            }
+        }
+        return Pair(items, flaggedItems)
     }
 
     override fun onDestroyView() {

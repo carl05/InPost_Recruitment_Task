@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,11 +21,8 @@ class ShipmentListViewModel @Inject constructor(
     private val mutableViewState = MutableLiveData<List<ShipmentNetwork>>(emptyList())
     val viewState: LiveData<List<ShipmentNetwork>> = mutableViewState
 
-    init {
-        refreshData()
-    }
-
-    private fun refreshData() {
+    @OptIn(DelicateCoroutinesApi::class)
+    fun refreshData() {
         GlobalScope.launch(Dispatchers.Main) {
             val shipments = shipmentUseCase.getShipments()
             mutableViewState.setState { shipments }
