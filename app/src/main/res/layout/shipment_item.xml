@@ -85,7 +85,7 @@
 
             <ImageView
                 android:contentDescription="@string/delivery_method"
-                android:id="@+id/img_status"
+                android:id="@+id/iv_status"
                 android:layout_width="@dimen/_48dp"
                 android:layout_height="@dimen/_48dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
                 android:layout_marginTop="@dimen/_16dp"
                 tools:text="@string/delivery_status"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_status" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_status" />
 
             <TextView
                 android:id="@+id/tv_delivery_status"

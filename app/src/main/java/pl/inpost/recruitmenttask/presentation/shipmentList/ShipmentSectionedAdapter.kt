@@ -4,8 +4,11 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.data.network.model.ShipmentStatus
+import pl.inpost.recruitmenttask.data.network.model.ShipmentType
 import pl.inpost.recruitmenttask.databinding.ItemCategoryBinding
 import pl.inpost.recruitmenttask.databinding.ShipmentItemBinding
 import pl.inpost.recruitmenttask.gone
@@ -99,8 +102,15 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
                 firstLog?.let { eventLogVO ->
                     fillStatusOperationLabel(eventLogVO)
                     fillStatusOperationDesciption(eventLogVO)
+                    fillTypeImage(shipmentType)
                 } ?: showOperationStatus(false)
             }
+        }
+
+        private fun fillTypeImage(shipmentType: String) {
+            if(shipmentType.lowercase() == ShipmentType.PARCEL_LOCKER.name.lowercase())
+                binding.ivStatus.setImageDrawable(
+                    AppCompatResources.getDrawable(binding.root.context, R.drawable.ic_figma_locker))
         }
 
         @RequiresApi(Build.VERSION_CODES.O) // thats a problem to be fixed Zoned date time pattern requires api 26 or external library to parse

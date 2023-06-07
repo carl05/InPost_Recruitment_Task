@@ -23,6 +23,7 @@ private fun ShipmentNetwork.toVO() = ShipmentNetworkVO(
     pickUpDate = this.pickUpDate,
     highlight = this.operations.highlight,
     senderEmail = this.sender?.email,
+    shipmentType = this.shipmentType,
     eventLog = this.eventLog.map { EventLogNetworkVO(name = it.name, date = it.date) }.toMutableList(),
     operation = OperationsNetworkVO(
         manualArchive = this.operations.manualArchive,

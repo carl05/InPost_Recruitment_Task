@@ -14,6 +14,7 @@ data class ShipmentNetworkVO(
     val highlight: Boolean,
     val operation: OperationsNetworkVO,
     val eventLog: MutableList<EventLogNetworkVO>,
+    val shipmentType: String,
 )
 
 /**
