@@ -5,27 +5,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="12dp"
+    android:paddingVertical="@dimen/_12dp"
     >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="@dimen/_4dp"
+        app:cardElevation="@dimen/_4dp"
         android:background="@color/white"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="@dimen/_20dp">
 
             <TextView
                 android:id="@+id/label_order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order ID"
+                android:text="@string/order_id"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
                 android:id="@+id/tv_shipment_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_4dp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_order_id"
@@ -43,8 +43,8 @@
                 android:id="@+id/label_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Status"
+                android:layout_marginTop="@dimen/_16dp"
+                android:text="@string/status"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_shipment_number" />
 
@@ -52,7 +52,7 @@
                 android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/black"
@@ -67,16 +67,16 @@
                 android:id="@+id/label_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="User ID"
+                android:layout_marginTop="@dimen/_16dp"
+                android:text="@string/user_id"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
             <TextView
-                android:id="@+id/text_user_id"
+                android:id="@+id/tv_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_4dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,40 +84,41 @@
                 tools:text="789" />
 
             <ImageView
+                android:contentDescription="@string/delivery_method"
                 android:id="@+id/img_status"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/_48dp"
+                android:layout_height="@dimen/_48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_local_shipping" />
 
 
             <TextView
-                android:id="@+id/label_delivery_status"
+                android:id="@+id/tv_label_delivery_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Delivery Status"
+                android:layout_marginTop="@dimen/_16dp"
+                tools:text="@string/delivery_status"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_status" />
 
             <TextView
-                android:id="@+id/text_delivery_status"
+                android:id="@+id/tv_delivery_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_4dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_delivery_status"
+                app:layout_constraintTop_toBottomOf="@+id/tv_label_delivery_status"
                 tools:text="Delivered" />
 
             <TextView
                 android:id="@+id/text_delivery_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Detalhes"
+                android:layout_marginEnd="@dimen/_8dp"
+                android:text="@string/details"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -125,11 +126,12 @@
 
             <ImageView
                 android:id="@+id/img_arrow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/_24dp"
+                android:layout_height="@dimen/_24dp"
                 android:src="@drawable/ic_arrow_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/details" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

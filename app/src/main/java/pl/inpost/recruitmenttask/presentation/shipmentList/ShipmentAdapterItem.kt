@@ -5,4 +5,4 @@ sealed class ShipmentAdapterItem
 
 data class CategoryItem(val name: String) : ShipmentAdapterItem()
 
-data class ShipmentItem(val shipmentNetwork: ShipmentNetworkVO) : ShipmentAdapterItem()
+data class ShipmentItem(val shipmentNetworkVO: ShipmentNetworkVO) : ShipmentAdapterItem()
