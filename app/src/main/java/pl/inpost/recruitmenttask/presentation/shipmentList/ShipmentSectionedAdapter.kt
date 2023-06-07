@@ -10,7 +10,8 @@ import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.data.network.model.ShipmentStatus
 import pl.inpost.recruitmenttask.data.network.model.ShipmentType
 import pl.inpost.recruitmenttask.databinding.ItemCategoryBinding
-import pl.inpost.recruitmenttask.databinding.ShipmentItemBinding
+import pl.inpost.recruitmenttask.databinding.ItemShipmentBinding
+
 import pl.inpost.recruitmenttask.gone
 import pl.inpost.recruitmenttask.visible
 import java.time.format.DateTimeFormatter
@@ -33,7 +34,7 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
             }
 
             VIEW_TYPE_ITEM -> {
-                val view = ShipmentItemBinding.inflate(LayoutInflater.from(parent.context))
+                val view = ItemShipmentBinding.inflate(LayoutInflater.from(parent.context))
                 ItemViewHolder(view)
             }
 
@@ -76,16 +77,15 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
         }
     }
 
-    inner class ItemViewHolder(val binding: ShipmentItemBinding) :
+    inner class ItemViewHolder(val binding: ItemShipmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O) // thats a problem to be fixed Zoned date time pattern requires api
         // 26 or external library to parse
         fun bind(shipmentVO: ShipmentVO) {
             shipmentVO.run {
                 binding.tvShipmentNumber.text = number
-                binding.tvStatus.text = status
+                binding.tvStatus.text = binding.root.context.getString(getResFromStatus(status))
                 binding.tvShipmentNumber.text = number
-                binding.tvStatus.text = status
                 binding.tvUserId.text = senderEmail
                 fillOperationStatus(this)
             }
@@ -123,12 +123,15 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
 
         private fun fillStatusOperationLabel(eventLogVO: EventLogNetworkVO) {
             showOperationStatus(true)
-            val status = if (ShipmentStatus.values().map { it.name }
-                    .contains(eventLogVO.name)) ShipmentStatus.valueOf(eventLogVO.name).nameRes
-            else ShipmentStatus.OTHER.nameRes
+            val status = getResFromStatus(eventLogVO.name)
 
             binding.tvLabelDeliveryStatus.text = binding.root.context.getString(status)
         }
+
+        private fun getResFromStatus(name: String) =
+            if (ShipmentStatus.values().map { it.name }
+                    .contains(name)) ShipmentStatus.valueOf(name).nameRes
+            else ShipmentStatus.OTHER.nameRes
 
         private fun showOperationStatus(show: Boolean) {
             if (show) {

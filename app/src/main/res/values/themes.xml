@@ -6,4 +6,34 @@
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- styles.xml -->
+    <style name="divider_tex">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#BBBDBF</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="style_label">
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">#929497</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="style_text_shipment">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#404041</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="style_details_button">
+    <item name="android:textSize">12sp</item>
+    <item name="android:letterSpacing">0.03</item>
+    <item name="android:textColor">#404041</item>
+    </style>
+
+
 </resources>

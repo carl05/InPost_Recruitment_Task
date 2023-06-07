@@ -27,7 +27,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/order_id"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAppearance="@style/style_label"
+                android:fontFamily="@font/montserrat_regular"
+                />
 
             <TextView
                 android:id="@+id/tv_shipment_number"
@@ -37,6 +40,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_order_id"
+                android:textAppearance="@style/style_text_shipment"
                 tools:text="123456" />
 
             <TextView
@@ -46,7 +50,9 @@
                 android:layout_marginTop="@dimen/_16dp"
                 android:text="@string/status"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_shipment_number" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_shipment_number"
+                android:textAppearance="@style/style_label"
+                />
 
             <TextView
                 android:id="@+id/tv_status"
@@ -61,7 +67,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/label_status"
                 app:layout_constraintWidth_percent="0.5"
                 tools:ignore="RtlHardcoded"
-                tools:text="Pending Pending Pending Pending Pending Pending Pending Pending Pending Pending" />
+                tools:text="Pending Pending Pending Pending Pending Pending Pending Pending Pending Pending"
+                android:textAppearance="@style/style_text_shipment"
+                />
 
             <TextView
                 android:id="@+id/label_user_id"
@@ -70,7 +78,9 @@
                 android:layout_marginTop="@dimen/_16dp"
                 android:text="@string/user_id"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_status" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_status"
+                android:textAppearance="@style/style_label"
+                />
 
             <TextView
                 android:id="@+id/tv_user_id"
@@ -81,7 +91,9 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_user_id"
-                tools:text="789" />
+                tools:text="789"
+                android:textAppearance="@style/style_text_shipment"
+                />
 
             <ImageView
                 android:contentDescription="@string/delivery_method"
@@ -122,16 +134,20 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/img_arrow" />
+                app:layout_constraintEnd_toStartOf="@+id/img_arrow"
+                android:textAppearance="@style/style_details_button"
+                />
 
             <ImageView
                 android:id="@+id/img_arrow"
                 android:layout_width="@dimen/_24dp"
                 android:layout_height="@dimen/_24dp"
                 android:src="@drawable/ic_arrow_forward"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_delivery_details"
+                app:layout_constraintBottom_toBottomOf="@id/text_delivery_details"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/details" />
+                android:contentDescription="@string/details"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
