@@ -2,8 +2,6 @@ package pl.inpost.recruitmenttask.presentation.shipmentList
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -23,11 +21,6 @@ class ShipmentListFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.shipment_list_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,9 +32,8 @@ class ShipmentListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.viewState.observe(requireActivity()) { shipments ->
-            val data = shipments.toMutableList()
-            val (items, flaggedItems) = fillAdapterList(data)
+        viewModel.mutableViewState.observe(requireActivity()) { shipments ->
+            val (items, flaggedItems) = fillAdapterList(shipments)
             val adapter = ShipmentSectionedAdapter(items + flaggedItems)
             binding?.recycleViewShipments?.adapter = adapter
             binding?.swipeRefresh?.isRefreshing = false
@@ -55,8 +47,6 @@ class ShipmentListFragment : Fragment() {
     private fun fillAdapterList(shipments: MutableList<ShipmentVO>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
         val items = mutableListOf<ShipmentAdapterItem>()
         val flaggedItems = mutableListOf<ShipmentAdapterItem>()
-
-        viewModel.sortItems(shipments)
 
         shipments.forEach { shipmentNetworkVO ->
             if (shipmentNetworkVO.highlight) {

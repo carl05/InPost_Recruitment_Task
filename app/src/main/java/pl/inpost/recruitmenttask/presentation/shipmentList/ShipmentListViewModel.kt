@@ -1,6 +1,5 @@
 package pl.inpost.recruitmenttask.presentation.shipmentList
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,17 +13,17 @@ import pl.inpost.recruitmenttask.util.setState
 import javax.inject.Inject
 
 @HiltViewModel
-class ShipmentListViewModel @Inject constructor(
-    private val shipmentUseCase: ShipmentsUseCase
+open class ShipmentListViewModel @Inject constructor(
+    val shipmentUseCase: ShipmentsUseCase
 ) : ViewModel() {
 
-    private val mutableViewState = MutableLiveData<List<ShipmentVO>>(emptyList())
-    val viewState: LiveData<List<ShipmentVO>> = mutableViewState
+    val mutableViewState = MutableLiveData<MutableList<ShipmentVO>>(mutableListOf())
 
     @OptIn(DelicateCoroutinesApi::class)
     fun refreshData() {
         GlobalScope.launch(Dispatchers.Main) {
-            val shipments = shipmentUseCase.getShipments()
+            val shipments = shipmentUseCase.getShipments().toMutableList()
+            sortItems(shipments)
             mutableViewState.setState { shipments }
         }
     }
