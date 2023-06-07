@@ -51,7 +51,7 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
             }
 
             is ItemViewHolder -> {
-                holder.bind((item as ShipmentItem).shipmentNetworkVO)
+                holder.bind((item as ShipmentItem).shipmentVO)
             }
         }
     }
@@ -80,8 +80,8 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O) // thats a problem to be fixed Zoned date time pattern requires api
         // 26 or external library to parse
-        fun bind(shipmentNetworkVO: ShipmentNetworkVO) {
-            shipmentNetworkVO.run {
+        fun bind(shipmentVO: ShipmentVO) {
+            shipmentVO.run {
                 binding.tvShipmentNumber.text = number
                 binding.tvStatus.text = status
                 binding.tvShipmentNumber.text = number
@@ -95,8 +95,8 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
 
         @RequiresApi(Build.VERSION_CODES.O) // thats a problem to be fixed Zoned date time pattern requires api 26
         // or external library to parse
-        private fun fillOperationStatus(shipmentNetworkVO: ShipmentNetworkVO) {
-            shipmentNetworkVO.run {
+        private fun fillOperationStatus(shipmentVO: ShipmentVO) {
+            shipmentVO.run {
                 eventLog.sortByDescending { it.date }
                 val firstLog = eventLog.firstOrNull()
                 firstLog?.let { eventLogVO ->

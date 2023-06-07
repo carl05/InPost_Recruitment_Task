@@ -18,8 +18,8 @@ class ShipmentListViewModel @Inject constructor(
     private val shipmentUseCase: ShipmentsUseCase
 ) : ViewModel() {
 
-    private val mutableViewState = MutableLiveData<List<ShipmentNetworkVO>>(emptyList())
-    val viewState: LiveData<List<ShipmentNetworkVO>> = mutableViewState
+    private val mutableViewState = MutableLiveData<List<ShipmentVO>>(emptyList())
+    val viewState: LiveData<List<ShipmentVO>> = mutableViewState
 
     @OptIn(DelicateCoroutinesApi::class)
     fun refreshData() {
@@ -29,7 +29,7 @@ class ShipmentListViewModel @Inject constructor(
         }
     }
 
-    fun sortItems(items: MutableList<ShipmentNetworkVO>) {
+    fun sortItems(items: MutableList<ShipmentVO>) {
         items.sortWith(compareBy(
             { shipment ->
                 if (ShipmentStatus.values().map { it.name }

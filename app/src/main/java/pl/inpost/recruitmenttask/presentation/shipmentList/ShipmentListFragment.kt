@@ -52,7 +52,7 @@ class ShipmentListFragment : Fragment() {
         viewModel.refreshData()
     }
 
-    private fun fillAdapterList(shipments: MutableList<ShipmentNetworkVO>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
+    private fun fillAdapterList(shipments: MutableList<ShipmentVO>): Pair<MutableList<ShipmentAdapterItem>, MutableList<ShipmentAdapterItem>> {
         val items = mutableListOf<ShipmentAdapterItem>()
         val flaggedItems = mutableListOf<ShipmentAdapterItem>()
 

@@ -3,7 +3,7 @@ package pl.inpost.recruitmenttask.presentation.shipmentList
 import java.time.ZonedDateTime
 
 
-data class ShipmentNetworkVO(
+data class ShipmentVO(
     val number: String,
     val senderName: String?,
     val senderEmail: String?,
