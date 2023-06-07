@@ -14,7 +14,7 @@ class ShipmentsUseCase @Inject constructor(private val shipmentApi: ShipmentApi)
 
 }
 
-private fun ShipmentNetwork.toVO() = ShipmentVO(
+fun ShipmentNetwork.toVO() = ShipmentVO(
     number = this.number,
     senderName = this.sender?.name,
     status = this.status,

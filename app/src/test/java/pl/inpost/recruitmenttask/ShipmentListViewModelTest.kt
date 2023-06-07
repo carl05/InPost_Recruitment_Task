@@ -79,6 +79,12 @@ class ShipmentListViewModelTest {
         assertEquals(shipmentListViewModel.mutableViewState.value?.isEmpty(), true)
     }
 
+    /**
+     * here we do not focus on test if sort method is working
+     * this is already done by kotlin api
+     * our focus is to have sure that whenever we load data
+     * the sort method is called from viewmodel
+     */
     @Test
     fun `test sort items`() {
         //Arrange
