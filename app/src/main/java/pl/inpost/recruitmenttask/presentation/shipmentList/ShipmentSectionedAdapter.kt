@@ -102,8 +102,8 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
                 firstLog?.let { eventLogVO ->
                     fillStatusOperationLabel(eventLogVO)
                     fillStatusOperationDesciption(eventLogVO)
-                    fillTypeImage(shipmentType)
                 } ?: showOperationStatus(false)
+                fillTypeImage(shipmentType)
             }
         }
 
@@ -140,7 +140,6 @@ class ShipmentSectionedAdapter(private val itemList: List<ShipmentAdapterItem>) 
             } else {
                 binding.tvDeliveryStatus.gone()
                 binding.tvLabelDeliveryStatus.gone()
-
             }
         }
     }
