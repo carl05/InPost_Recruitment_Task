@@ -1,15 +1,18 @@
 package pl.inpost.recruitmenttask.domain
 
-import pl.inpost.recruitmenttask.data.network.api.ShipmentApi
+import android.os.Build
+import androidx.annotation.RequiresApi
+import pl.inpost.recruitmenttask.data.local.ShipmentRepository
 import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.presentation.shipmentList.EventLogNetworkVO
 import pl.inpost.recruitmenttask.presentation.shipmentList.OperationsNetworkVO
 import pl.inpost.recruitmenttask.presentation.shipmentList.ShipmentVO
 import javax.inject.Inject
 
-class ShipmentsUseCase @Inject constructor(private val shipmentApi: ShipmentApi) {
+class ShipmentsUseCase @Inject constructor(private val shipmentRepository: ShipmentRepository) {
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun getShipments(): List<ShipmentVO> {
-        return shipmentApi.getShipments().map { it.toVO() }
+        return shipmentRepository.getShipments().map { it.toVO() }
     }
 
 }

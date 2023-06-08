@@ -7,7 +7,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import pl.inpost.recruitmenttask.R
 import pl.inpost.recruitmenttask.data.network.ApiTypeAdapter
-import pl.inpost.recruitmenttask.data.network.model.*
+import pl.inpost.recruitmenttask.data.network.model.CustomerNetwork
+import pl.inpost.recruitmenttask.data.network.model.EventLogNetwork
+import pl.inpost.recruitmenttask.data.network.model.OperationsNetwork
+import pl.inpost.recruitmenttask.data.network.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.data.network.model.ShipmentStatus
+import pl.inpost.recruitmenttask.data.network.model.ShipmentType
+import pl.inpost.recruitmenttask.data.network.model.ShipmentsResponse
 import java.time.ZonedDateTime
 import kotlin.random.Random
 
